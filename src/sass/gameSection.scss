@@ -1,0 +1,46 @@
+.gameScreen {
+    width: 80vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.boardRow {
+    display: flex;
+}
+
+.boardTile {
+    background-color: rgb(180, 180, 180);
+    position: relative;
+    height: 1rem;
+    width: 1rem;
+    padding: 1rem;
+    margin: .1rem;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    background-size: 50%;
+}
+
+.tileHover {
+    background-color: rgb(0, 75, 0);
+}
+.redTile {
+    background-color: red;
+}
+
+.tiltedTile {
+    animation-duration:.5s;
+    animation-name: tilt;
+}
+@keyframes tilt {
+    0% {left:0; }
+    25% { left: 5px; }
+    50%{ left: -5px; }
+    75%{ left: 5px; }
+    100%{ left: 0; }
+    }
