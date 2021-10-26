@@ -62,15 +62,25 @@ const aplyProps = (e) => {
   if (selectedProps !== "") {
     /*vérification si la case est déja occupée*/
     if (curentBehavior !== "basicTile") {
-      console.log('nop')
-      e.target.classList.add("tiltedTile")
-      setTimeout(() => {
-        e.target.classList.remove("tiltedTile")
-        
-      }, 1000);
+      if (selectedProps === 'trash') {
+        /*si la corbeille est selectionnée*/
+        let coord= e.target.dataset.coord
+        updateMap(coord)
+
+      } else {
+        /*si la tuile est déjà occupée*/
+
+        e.target.classList.add("tiltedTile")
+        setTimeout(() => {
+          e.target.classList.remove("tiltedTile")
+          
+        }, 1000);
+      }
 
         
       } else {
+        /*si la tuile est déjà occupée*/
+
         let coord= e.target.dataset.coord
         updateMap(coord)
       }
@@ -84,7 +94,7 @@ const updateMap = (newCoord) => {
   newMap.forEach(row => {
     row.forEach(tile => {
       if(tile.coord === newCoord) {
-        tile.behavior = selectedProps
+        selectedProps !== 'trash' ? tile.behavior = selectedProps : tile.behavior = 'basicTile'
       }
     })
   }) 

@@ -10,14 +10,17 @@ export default function MainScreen() {
   const [selectedProps, setSelectedProps] = useState('')
 
   const holMenueSlect = (option) => {
-    setSelectedProps(option)
+    if(selectedProps === option) {
+    setSelectedProps("")
+
+    } else {
+      setSelectedProps(option)
+    }
   }
 
-  
-    
   return (
         <div className="mainScreen">
-            <MenuSection holMenueSlect={holMenueSlect}/>
+            <MenuSection selectedProps={selectedProps} holMenueSlect={holMenueSlect}/>
             <GameSection selectedProps={selectedProps}/>
         </div>
       )
