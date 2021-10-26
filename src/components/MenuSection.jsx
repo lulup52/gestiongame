@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../sass/menuSection.css"
 
-export default function MenuSection({holMenueSlect}) {
+export default function MenuSection({holMenueSlect, hintManager}) {
+
+  const manageHint = (e) => {
+    hintManager()
+    manageHolingProps(e)
+  }
+  
 
   const manageHolingProps = (propsSelected) => {
     let props = propsSelected.target
@@ -15,21 +21,22 @@ export default function MenuSection({holMenueSlect}) {
 
     }
     holMenueSlect(props.id)
-
-
-
-
+    props.id !== 'hint' && hintManager("clearHint")
   }
     
   return (
-        <div className="menuSection">
-            
-            <button className='menuOption' id='trash' onClick={e => manageHolingProps(e)}></button>  
-            <div className='menuOption' id='house' onClick={e => manageHolingProps(e)}></div>  
-            <div className='menuOption' id='store' onClick={e => manageHolingProps(e)}></div>  
-            <div className='menuOption' id='tree' onClick={e => manageHolingProps(e)}></div>  
-            <div className='menuOption' id='industry' onClick={e => manageHolingProps(e)}></div>  
-        </div>
+    <>
+      <div className="menuSection">
+          
+          <div className='menuOption trash' id='trash' onClick={e => manageHolingProps(e)}></div>  
+          <div className='menuOption house' id='house' onClick={e => manageHolingProps(e)}></div>  
+          <div className='menuOption store' id='store' onClick={e => manageHolingProps(e)}></div>  
+          <div className='menuOption tree' id='tree' onClick={e => manageHolingProps(e)}></div>  
+          <div className='menuOption industry' id='industry' onClick={e => manageHolingProps(e)}></div>  
+          <div className='menuOption hint' id='hint' onClick={e => manageHint(e)}></div>  
+      </div>
+
+    </>
       )
     
   

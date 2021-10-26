@@ -8,6 +8,7 @@ import { useState } from 'react/cjs/react.development';
 export default function MainScreen() {
 
   const [selectedProps, setSelectedProps] = useState('')
+  const [hintActivated, setHintActivated] = useState(false)
 
   const holMenueSlect = (option) => {
     if(selectedProps === option) {
@@ -18,10 +19,15 @@ export default function MainScreen() {
     }
   }
 
+  const hintManager = (hintState) => {
+    hintState === "clearHint" ? setHintActivated(false) : setHintActivated(!hintActivated)
+  }
+
+
   return (
         <div className="mainScreen">
-            <MenuSection selectedProps={selectedProps} holMenueSlect={holMenueSlect}/>
-            <GameSection selectedProps={selectedProps}/>
+            <MenuSection selectedProps={selectedProps} holMenueSlect={holMenueSlect} hintManager={hintManager}/>
+            <GameSection selectedProps={selectedProps} hintActivated={hintActivated}/>
         </div>
       )
     

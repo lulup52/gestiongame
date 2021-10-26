@@ -38,19 +38,27 @@
   background-color: grey;
 }
 
-#house {
+.house {
   background-image: url(../svgImg/home-solid.svg);
 }
 
-#store {
+.store {
   background-image: url(../svgImg/store-solid.svg);
 }
 
-#tree {
+.tree {
   background-image: url(../svgImg/tree-solid.svg);
 }
 
-#industry {
+.industry {
   background-image: url(../svgImg/industry-solid.svg);
+}
+
+.trash {
+  background-color: red;
+}
+
+.hint {
+  background-color: blue;
 }
 /*# sourceMappingURL=menuSection.css.map */

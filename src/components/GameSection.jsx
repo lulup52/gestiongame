@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import '../sass/gameSection.css'
 
-export default function GameSection({selectedProps}) {
+export default function GameSection({selectedProps, hintActivated}) {
 
     const [gameIsOn, setGameIsOn] = useState(false)
     const [boardMap, setBoardMap] = useState([])
@@ -46,8 +46,20 @@ export default function GameSection({selectedProps}) {
   /*---------------------gestion du hover en fonction de si la tuile est vide ou non-------------------------*/
 
 const checkEmpty = (e) => {
-  if(e.target.id  !== "basicTile") {
+  let targetBehavior = e.target.dataset.behavior
+  if(targetBehavior  !== "basicTile") {
+    /*verification de l'activation du bouton hint*/
+    if (!hintActivated) {
+      /*si le bouton hint n'est pas activé, la verif de la case se fait normalement*/
       e.target.classList.add("redTile")
+
+    } else {
+      /*si le bouton hint activé,la verif de la case ne se fait mais on affichera la porté de tous 
+      les props du même type que la case survolée*/
+
+      console.log(`ceci est un ${targetBehavior }`)
+      console.log(document.getElementsByClassName(`boardTile ${targetBehavior}`))
+    }
   }
 }
 
@@ -57,7 +69,7 @@ const cleanHover = (e) => {
 
 /*---------------------remplacer la tile par le props selectioné dans le menu-------------------------*/
 const aplyProps = (e) => {
-  let curentBehavior = e.target.id
+  let curentBehavior = e.target.dataset.behavior
   /*vérification qu'un props a bien été selectioné dans le menu*/
   if (selectedProps !== "") {
     /*vérification si la case est déja occupée*/
@@ -130,7 +142,7 @@ const update = (on) => {
                 <div className='boardRow'>
                   {
                     row.map(tile =>
-                      <div className='boardTile' data-coord={tile.coord} id={tile.behavior} onClick={e => aplyProps(e)} onMouseEnter={e => checkEmpty(e)} onMouseLeave={e => cleanHover(e)}></div>
+                      <div className={`boardTile ${tile.behavior}`} data-coord={tile.coord} data-behavior={tile.behavior} onClick={e => aplyProps(e)} onMouseEnter={e => checkEmpty(e)} onMouseLeave={e => cleanHover(e)}></div>
                     )
                   }
                 </div>
