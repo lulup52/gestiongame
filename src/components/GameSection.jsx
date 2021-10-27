@@ -58,11 +58,57 @@ const checkEmpty = (e) => {
       les props du même type que la case survolée*/
 
       console.log(`ceci est un ${targetBehavior }`)
-      console.log(document.getElementsByClassName(`boardTile ${targetBehavior}`))
+      let propsListe = document.getElementsByClassName(`boardTile ${targetBehavior}`)
+      let allCaseToCheck = []
+      for(let i = 0; i < propsListe.length; i++) {
+
+        allCaseToCheck.push(propsListe[i].dataset.coord)
+
+      }
+      let aroundCases = checkAroundCase(allCaseToCheck)
+
     }
   }
 }
 
+const checkAroundCase = (propCasesCoord) => {
+  let casesCoordListes = []
+
+  /*on parcours la liste de toutes les cases contenant le même type que celui survolé grace a hint*/
+  propCasesCoord.forEach(propCase => {
+    let caseToCheck = parseInt(propCase)
+  /*on vérifie, pour chaque case, les 8 cases qui l'entourent aaaaaaa retravailler
+   */
+    let caseHautGauche = caseToCheck - 11
+    let caseHaut = caseToCheck - 10
+    let caseHautDroit = caseToCheck - 9
+    let caseGauche = caseToCheck - 1
+    let caseDroit = caseToCheck + 1
+    let caseBasGauche = caseToCheck + 9
+    let caseBas = caseToCheck + 10
+    let caseBasDroit = caseToCheck + 11
+
+    let aroundArray = [caseHautGauche,caseHaut,caseHautDroit,caseGauche, caseDroit, caseBasGauche, caseBas, caseBasDroit]
+    let validateAroundCases = []
+
+    boardMap.forEach(row => row.forEach(tile=> {
+
+    }))
+
+    console.log(`validateAroundCases pour coord ${propCase} : ${aroundArray}`)
+  })
+
+  // if((propCasesCoord - 11)[0] === caseY - 1) {
+  //   console.log((propCasesCoord - 11))
+  // } else {
+  //   console.log('hors map')
+
+  // }
+  
+  
+
+  return () => casesCoordListes
+}
 const cleanHover = (e) => {
   e.target.classList.remove("redTile")
 }
