@@ -33,6 +33,22 @@
   background-size: 50%;
 }
 
+.treeRange {
+  background-color: rgba(12, 199, 12, 0.2);
+}
+
+.houseRange {
+  background-color: rgba(199, 149, 12, 0.2);
+}
+
+.industryRange {
+  background-color: rgba(230, 4, 4, 0.2);
+}
+
+.storeRange {
+  background-color: rgba(12, 40, 199, 0.2);
+}
+
 .tileHover {
   background-color: #004b00;
 }
