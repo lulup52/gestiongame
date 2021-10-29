@@ -6,15 +6,24 @@ export default function GameSection({selectedProps, hintActivated}) {
     const [gameIsOn, setGameIsOn] = useState(false)
     const [boardMap, setBoardMap] = useState([])
     const [mapSize, setMapSize] = useState(10)
-    const [mapReseted, setMapReseted] = useState(true)
+    const [mapUpdater, setMapUpdater] = useState('')
+// peu etre a sup
+    // const [houseHitbox, setHouseHitbox] = useState([])
+    // const [treeHitbox, setTreeHitbox] = useState([])
+    // const [storeHitbox, setStoreHitbox] = useState([])
+    // const [industryHitbox, setIndustryHitbox] = useState([])
+    
+    const [propsHintHitbox, setPropsHintHitbox] = useState([])
+
+
 
     useEffect(() => {
       boardInit()
     },[])
 
     useEffect(() => {
-      
-    },[mapReseted])
+      console.log("map is updated")
+    },[mapUpdater])
     
 
 /*--------------création de la map------------------*/
@@ -46,6 +55,8 @@ export default function GameSection({selectedProps, hintActivated}) {
   /*---------------------gestion du hover en fonction de si la tuile est vide ou non-------------------------*/
 
 const hoverCheck = (e) => {
+  setMapUpdater('')
+
   let targetBehavior = e.target.dataset.behavior
   if(targetBehavior  !== "basicTile") {
     /*verification de l'activation du bouton hint*/
@@ -74,16 +85,20 @@ const hoverCheck = (e) => {
   
   
         /*on aplique la classe correspondant à la portée du props selectioné*/      
+        let tileToHilight = []
         aroundCases.forEach(tile => {
           let tileToUpdate = document.getElementsByName(tile)[0]
           if(tileToUpdate.dataset.behavior === 'basicTile') {
-            tileToUpdate.classList.add(`${targetBehavior}Range`)
+
+            // tileToUpdate.classList.add(`${targetBehavior}Range`)
+
+              tileToHilight.push(tileToUpdate.dataset.coord)
           }
           
         })
-  
-        
-        console.log(document.querySelectorAll(".houseRange ,.treeRange, .industryRange, .storeRange"))
+        setPropsHintHitbox(tileToHilight)
+        console.log('buuuuuuuuuuuububububu')
+        updateMap(tileToHilight, "hint", targetBehavior)
 
     }
   }
@@ -170,7 +185,7 @@ const aplyProps = (e) => {
       if (selectedProps === 'trash') {
         /*si la corbeille est selectionnée*/
         let coord= e.target.dataset.coord
-        updateMap(coord)
+        updateMap(coord, 'trash')
 
       } else {
         /*si la tuile est déjà occupée*/
@@ -184,27 +199,35 @@ const aplyProps = (e) => {
 
         
       } else {
-        /*si la tuile est déjà occupée*/
+        /*si la tuile est libre*/
 
         let coord= e.target.dataset.coord
-        updateMap(coord)
+        updateMap(coord, "build")
       }
     }
   }
 
 
 /*---------------------mise a jour de la map------------------------*/
-const updateMap = (newCoord) => {
+const updateMap = (newCoord, updater, newClass) => {
+  setMapUpdater("")
   let newMap = boardMap
+
   newMap.forEach(row => {
     row.forEach(tile => {
-      if(tile.coord === newCoord) {
+      if(updater === "hint") {
+        newCoord.forEach(tileToHilight => {
+          if(tileToHilight===tile.coord) {
+            tile.behavior = `${newClass}Range`
+          }     
+        })
+        } else if(tile.coord === newCoord) {
         selectedProps !== 'trash' ? tile.behavior = selectedProps : tile.behavior = 'basicTile'
       }
     })
   }) 
   setBoardMap(newMap)
-  setMapReseted(!mapReseted)
+  setMapUpdater(updater)
 }
 
 /*---------------------mise a jour constate de la partie------------------------*/
@@ -234,7 +257,7 @@ const update = (on) => {
               boardMap.map(row => 
                 <div className='boardRow'>
                   {
-                    row.map(tile =>
+                    row.map(tile => 
                       <div className={`boardTile ${tile.behavior}`} name={tile.coord} data-coord={tile.coord} data-behavior={tile.behavior} onClick={e => aplyProps(e)} onMouseEnter={e => hoverCheck(e)} onMouseLeave={e => cleanHover(e)}></div>
                     )
                   }
