@@ -7,6 +7,8 @@ export default function GameSection({selectedProps, hintActivated}) {
     const [boardMap, setBoardMap] = useState([])
     const [mapSize, setMapSize] = useState(10)
     const [mapUpdater, setMapUpdater] = useState('')
+    const [curentPropsHinted, setCurentPropsHinted] = useState('')
+    
 // peu etre a sup
     // const [houseHitbox, setHouseHitbox] = useState([])
     // const [treeHitbox, setTreeHitbox] = useState([])
@@ -86,19 +88,24 @@ const hoverCheck = (e) => {
   
         /*on aplique la classe correspondant à la portée du props selectioné*/      
         let tileToHilight = []
+        
         aroundCases.forEach(tile => {
           let tileToUpdate = document.getElementsByName(tile)[0]
-          if(tileToUpdate.dataset.behavior === 'basicTile') {
-
-            // tileToUpdate.classList.add(`${targetBehavior}Range`)
-
+          
+          /*la porté n'est mise a jour que si la case ne contient pas de props*/      
+          if(tileToUpdate.dataset.behavior !== "house"&&
+              tileToUpdate.dataset.behavior !== "store" &&
+              tileToUpdate.dataset.behavior !== "tree" &&
+              tileToUpdate.dataset.behavior !== "industry"
+          ) {
               tileToHilight.push(tileToUpdate.dataset.coord)
           }
           
         })
+        setCurentPropsHinted(targetBehavior)
         setPropsHintHitbox(tileToHilight)
-        console.log('buuuuuuuuuuuububububu')
-        updateMap(tileToHilight, "hint", targetBehavior)
+       
+        // updateMap(tileToHilight, "hint", targetBehavior)
 
     }
   }
@@ -215,13 +222,14 @@ const updateMap = (newCoord, updater, newClass) => {
 
   newMap.forEach(row => {
     row.forEach(tile => {
-      if(updater === "hint") {
-        newCoord.forEach(tileToHilight => {
-          if(tileToHilight===tile.coord) {
-            tile.behavior = `${newClass}Range`
-          }     
-        })
-        } else if(tile.coord === newCoord) {
+      // if(updater === "hint") {
+      //   newCoord.forEach(tileToHilight => {
+      //     if(tileToHilight === tile.coord) {
+      //       console.log('test')
+      //     }     
+      //   })
+      //   } else 
+        if(tile.coord === newCoord) {
         selectedProps !== 'trash' ? tile.behavior = selectedProps : tile.behavior = 'basicTile'
       }
     })
@@ -258,8 +266,12 @@ const update = (on) => {
                 <div className='boardRow'>
                   {
                     row.map(tile => 
+                      propsHintHitbox.length !==0 && propsHintHitbox.includes(tile.coord)?
+                      /* on vérifie est ce que la case fait parti de la range d'un props survolé ou si il s'agit d'une tuile normale*/ 
+                      <div className={`boardTile ${curentPropsHinted}Range`} name={tile.coord} data-coord={tile.coord} data-behavior={tile.behavior} onClick={e => aplyProps(e)} onMouseEnter={e => hoverCheck(e)} onMouseLeave={e => cleanHover(e)}></div>
+                      :
                       <div className={`boardTile ${tile.behavior}`} name={tile.coord} data-coord={tile.coord} data-behavior={tile.behavior} onClick={e => aplyProps(e)} onMouseEnter={e => hoverCheck(e)} onMouseLeave={e => cleanHover(e)}></div>
-                    )
+                      )
                   }
                 </div>
               )
