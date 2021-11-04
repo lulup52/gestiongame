@@ -27,13 +27,28 @@ export default function MenuSection({holMenueSlect, hintManager}) {
   return (
     <>
       <div className="menuSection">
-          
-          <div className='menuOption trash' id='trash' onClick={e => manageHolingProps(e)}></div>  
-          <div className='menuOption house' id='house' onClick={e => manageHolingProps(e)}></div>  
-          <div className='menuOption store' id='store' onClick={e => manageHolingProps(e)}></div>  
-          <div className='menuOption tree' id='tree' onClick={e => manageHolingProps(e)}></div>  
-          <div className='menuOption industry' id='industry' onClick={e => manageHolingProps(e)}></div>  
-          <div className='menuOption hint' id='hint' onClick={e => manageHint(e)}></div>  
+          <div>
+            <div className='menuOption trash' id='trash' onClick={e => manageHolingProps(e)}></div>  
+          </div>
+          <div className='propsAndCounter'>
+            <div className='menuOption house' id='house' onClick={e => manageHolingProps(e)}></div>  
+            <p>0</p>
+          </div>
+          <div className='propsAndCounter'>
+            <div className='menuOption store' id='store' onClick={e => manageHolingProps(e)}></div>  
+            <p>0</p>
+          </div>
+          <div className='propsAndCounter'>
+            <div className='menuOption tree' id='tree' onClick={e => manageHolingProps(e)}></div>  
+            <p>0</p>
+          </div>  
+          <div className='propsAndCounter'>
+            <div className='menuOption industry' id='industry' onClick={e => manageHolingProps(e)}></div>  
+            <p>0</p>
+          </div>
+          <div>
+            <div className='menuOption hint' id='hint' onClick={e => manageHint(e)}></div>  
+          </div>
       </div>
 
     </>
