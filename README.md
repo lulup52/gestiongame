@@ -1,7 +1,7 @@
 # Ce projet est un prototype de jeux de gestion
 
 Développé via React, pour l'utiliser, il vous sufit le cloner le repo et exécuter ###'npm install' pour instaler les différents modules nécéssaires à l'utilisation de l'appli
-Une fois les modules instalés, lancer un serveur local via la commande ### 'npm start'
+Une fois les modules instalés, lancer un serveur local via la commande ### `npm start`
 
 # Le projet dans son état actuel
 
