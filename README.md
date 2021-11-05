@@ -5,9 +5,9 @@ Une fois les modules instalés, lancer un serveur local via la commande `npm sta
 
 # Le projet dans son état actuel
 
--sélectioner parmis éléments (arbre, maison, magasin, usine) et de les placer sur la grille
--retirer un élément via la fonction 'corbeille'
--afficher la portée d'un élément via la fonction 'info'
+##-sélectioner parmis éléments (arbre, maison, magasin, usine) et de les placer sur la grille
+##-retirer un élément via la fonction 'corbeille'
+##-afficher la portée d'un élément via la fonction 'info'
 
 # fonctionalités à venir
 
