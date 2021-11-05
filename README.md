@@ -11,9 +11,9 @@ Une fois les modules instalés, lancer un serveur local via la commande `npm sta
 
 # fonctionalités à venir
 
--gestion des conditions de placement de chaques éléments 
+#### -gestion des conditions de placement de chaques éléments 
 (*un arbre peut être positionné partout
 *une maison doit avoir au moins un arbre à sa porté
 *un magasin peut alimenter 3 maisons maximum dans sa porté
 *une usine peut alimenter 4 magasin dans saporté)
--création de différents niveaux (puzzle)
+#### -création de différents niveaux (puzzle)
