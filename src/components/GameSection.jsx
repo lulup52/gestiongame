@@ -3,6 +3,7 @@ import '../sass/gameSection.css'
 
 export default function GameSection({selectedProps, hintActivated}) {
 
+    const [mapSeed, setMapSeed] = useState(['00','01','02','03','04','05','06','07','08','09', '10'])
     const [gameIsOn, setGameIsOn] = useState(false)
     const [boardMap, setBoardMap] = useState([])
     const [mapSize, setMapSize] = useState(10)
@@ -34,8 +35,14 @@ export default function GameSection({selectedProps, hintActivated}) {
       for (let x = 0; x<mapSize; x++ ) {
         let row = []
         for (let y = 0; y<mapSize; y++ ) {
-          let tile = {coord : `${x}${y}`, behavior : "basicTile"}
-          row.push(tile)
+          if(mapSeed.includes(`${x}${y}`)) {
+            let tile = {coord : `${x}${y}`, behavior : "voidTile"}
+            row.push(tile)
+          } else {
+            let tile = {coord : `${x}${y}`, behavior : "basicTile"}
+            row.push(tile)
+          }
+          
         }
         newMap.push(row)
       }
