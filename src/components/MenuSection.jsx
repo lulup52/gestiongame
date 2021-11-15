@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import "../sass/menuSection.css"
 
-export default function MenuSection({holMenueSlect, hintManager}) {
+export default function MenuSection({holMenueSlect, hintManager, levelData}) {
+
+  const [houseToPlace, /*setHouseToPlace*/] = useState(levelData.props.house)
+  const [storeToPlace, /*setStoreToPlace*/] = useState(levelData.props.store)
+   const [industryToPlace, setIndustryToPlace] = useState(levelData.props.industry)
+   const [treeToPlace, setTreeToPlace] = useState(levelData.props.tree)
 
   const manageHint = (e) => {
     hintManager()
@@ -32,19 +37,19 @@ export default function MenuSection({holMenueSlect, hintManager}) {
           </div>
           <div className='propsAndCounter'>
             <div className='menuOption house' id='house' onClick={e => manageHolingProps(e)}></div>  
-            <p>0</p>
+            <p>{houseToPlace}</p>
           </div>
           <div className='propsAndCounter'>
             <div className='menuOption store' id='store' onClick={e => manageHolingProps(e)}></div>  
-            <p>0</p>
+            <p>{storeToPlace}</p>
           </div>
           <div className='propsAndCounter'>
             <div className='menuOption tree' id='tree' onClick={e => manageHolingProps(e)}></div>  
-            <p>0</p>
+            <p>{industryToPlace}</p>
           </div>  
           <div className='propsAndCounter'>
             <div className='menuOption industry' id='industry' onClick={e => manageHolingProps(e)}></div>  
-            <p>0</p>
+            <p>{treeToPlace}</p>
           </div>
           <div>
             <div className='menuOption hint' id='hint' onClick={e => manageHint(e)}></div>  
