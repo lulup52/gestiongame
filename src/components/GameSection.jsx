@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import '../sass/gameSection.css'
 
-export default function GameSection({selectedProps, hintActivated, levelData}) {
+export default function GameSection({selectedProps, hintActivated, levelData, propsPlacementDetector}) {
 
     const [gameIsOn, setGameIsOn] = useState(false)
     const [boardMap, setBoardMap] = useState([])
@@ -23,7 +23,6 @@ export default function GameSection({selectedProps, hintActivated, levelData}) {
     },[])
 
     useEffect(() => {
-      console.log("map is updated")
     },[mapUpdater])
     
 
@@ -77,7 +76,6 @@ const hoverCheck = (e) => {
         /*si le bouton hint activé,la verif de la case ne se fait pas mais on affichera la porté de tous 
         les props du même type que la case survolée qu'on stockera dans un tableau */
   
-        console.log(`ceci est un ${targetBehavior }`)
         let propsListe = document.getElementsByClassName(`boardTile ${targetBehavior}`)
         let allCaseToCheck = []
         for(let i = 0; i < propsListe.length; i++) {
@@ -87,7 +85,6 @@ const hoverCheck = (e) => {
         }
         /*on récupère la liste de toutes les cases valides adjacentes aux cases insérées dans allCaseToCheck*/
         let aroundCases = checkAroundCase(allCaseToCheck)
-        console.log(aroundCases)
         
   
   
@@ -160,7 +157,6 @@ const checkAroundCase = (propCasesCoord) => {
     /*création du tableau contenant toutes les cases potentiellement autour de la case cible, transformée en
     string pour que les coordonnées commencant par 0 (ex : 01, 02 ...) ne voient pas le 0 suprimé par la suite */
     let aroundArray = [caseHautGauche.toString(),caseHaut.toString(),caseHautDroit.toString(),caseGauche.toString(), caseDroit.toString(), caseBasGauche.toString(), caseBas.toString(), caseBasDroit.toString()]
-    // console.log(aroundArray)
     casesCoordListes.push(...aroundArray)
 
     /*on retire les doublons */
@@ -215,6 +211,7 @@ const aplyProps = (e) => {
 
         let coord= e.target.dataset.coord
         updateMap(coord, "build")
+
       }
     }
   }
@@ -230,27 +227,31 @@ const updateMap = (newCoord, updater, newClass) => {
       // if(updater === "hint") {
       //   newCoord.forEach(tileToHilight => {
       //     if(tileToHilight === tile.coord) {
-      //       console.log('test')
       //     }     
       //   })
       //   } else 
         if(tile.coord === newCoord) {
-        selectedProps !== 'trash' ? tile.behavior = selectedProps : tile.behavior = 'basicTile'
+          if (  selectedProps !== "trash") {
+            propsPlacementDetector(selectedProps)
+
+           tile.behavior = selectedProps
+          } else {
+            tile.behavior = 'basicTile'
+          }
       }
     })
   }) 
   setBoardMap(newMap)
   setMapUpdater(updater)
+
 }
 
 /*---------------------mise a jour constate de la partie------------------------*/
 
 const update = (on) => {
   if(on) {
-    console.log('im updated')
     update()
   }  else {
-    console.log('im stoped')
   }
 }
 
