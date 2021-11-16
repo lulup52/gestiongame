@@ -1,3 +1,8 @@
+p {
+  padding: 0;
+  margin: 0;
+}
+
 .menuSection {
   width: 20vw;
   display: -webkit-box;
@@ -38,19 +43,44 @@
   background-color: grey;
 }
 
-#house {
+.house {
   background-image: url(../svgImg/home-solid.svg);
 }
 
-#store {
+.store {
   background-image: url(../svgImg/store-solid.svg);
 }
 
-#tree {
+.tree {
   background-image: url(../svgImg/tree-solid.svg);
 }
 
-#industry {
+.industry {
   background-image: url(../svgImg/industry-solid.svg);
+}
+
+.trash {
+  background-color: red;
+  margin-bottom: 1rem;
+}
+
+.hint {
+  background-color: blue;
+  margin-top: 1rem;
+}
+
+.propsAndCounter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.propsAndCounter p {
+  margin: auto 0 auto 1rem;
+  padding: .5rem;
+  border: 1px black solid;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 /*# sourceMappingURL=menuSection.css.map */
