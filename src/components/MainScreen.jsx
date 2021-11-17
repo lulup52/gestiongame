@@ -8,60 +8,115 @@ import { useState } from 'react/cjs/react.development';
 import Levels from '../data/levels.json'
 export default function MainScreen() {
 /* ---------- on charge le lvl 1 par défaut ----------------- */
-  const [levelData, /*setLevelData*/] = useState(Levels[1])
+  const [levelData, /*setLevelData*/] = useState(Levels[0])
+  
+  const [propsToDisable, setPropsToDisable] = useState({
+    house : false,
+    store : false,
+    industry : false,
+    tree : false
+    })
+  const [propsToPlace, setPropsToPlace] = useState("")
 
+  useEffect(() => {
+    setPropsToPlace({
+      house : levelData.props.house,
+      store : levelData.props.store,
+      industry : levelData.props.industry,
+      tree : levelData.props.tree
+      }
+    )
+    },[])
 
-  const [propsPlaced, setPropsPlaced] = useState({
-    house : 0,
-    store : 0,
-    industry : 0,
-    tree : 0
-  })
+  useEffect(() => {
+    if(propsToPlace.house === 0) {
+      console.log("1")
+      // setPropsToDisable({
+      //   house : true,
+      //   store : propsToDisable.store,
+      //   industry : propsToDisable.industry,
+      //   tree : propsToDisable.tree
+      //   })
+    }
+    if(propsToPlace.store === 0) {
+      console.log("2")
+
+      // setPropsToDisable({
+      //   house : propsToDisable.house,
+      //   store : true,
+      //   industry : propsToDisable.industry,
+      //   tree : propsToDisable.tree
+      //   })
+    }
+    if(propsToPlace.industry === 0) {
+      console.log("3")
+
+      // setPropsToDisable({
+      //   house : propsToDisable.house,
+      //   store : propsToDisable.store,
+      //   industry : true,
+      //   tree : propsToDisable.tree
+      //   })
+    }
+    if(propsToPlace.tree === 0) {
+      console.log("4")
+
+      // setPropsToDisable({
+      //   house : propsToDisable.house,
+      //   store : propsToDisable.store,
+      //   industry : propsToDisable.industry,
+      //   tree : true
+      //   })
+    }
+
+    },[propsToPlace])
+
 
   const [selectedProps, setSelectedProps] = useState('')
   const [hintActivated, setHintActivated] = useState(false)
 
  
+  const disablePlacement = (state) => {
+  }
 
-
+  /*------gérer le stock le décompte des props a placer --------*/
   const propsPlacementDetector =(props) => {
-    console.log(selectedProps)
+    console.log(props)
     switch(props) {
-      case 'house' :
-        setPropsPlaced({
-          house : propsPlaced.house + 1,
-          store : propsPlaced.store,
-          industry : propsPlaced.industry,
-          tree : propsPlaced.tree
-        })    
-        break
-      case 'store' :
-        setPropsPlaced({
-          house : propsPlaced.house,
-          store : propsPlaced.store + 1,
-          industry : propsPlaced.industry,
-          tree : propsPlaced.tree
-        })    
-        break
-      case 'industry' :
-        setPropsPlaced({
-          house : propsPlaced.house,
-          store : propsPlaced.store,
-          industry : propsPlaced.industry + 1,
-          tree : propsPlaced.tree
-        })    
-        break
-      case 'tree' :
-        setPropsPlaced({
-          house : propsPlaced.house,
-          store : propsPlaced.store,
-          industry : propsPlaced.industry,
-          tree : propsPlaced.tree + 1
-        })    
-        break
-        
-        
-      }
+      case "house":
+        setPropsToPlace({
+          house : propsToPlace.house - 1,
+          store : propsToPlace.store,
+          industry : propsToPlace.industry,
+          tree : propsToPlace.tree
+          })
+      break;
+      case "store":
+        setPropsToPlace({
+          house : propsToPlace.house ,
+          store : propsToPlace.store - 1,
+          industry : propsToPlace.industry,
+          tree : propsToPlace.tree
+          })
+      break;
+      case "industry":
+        setPropsToPlace({
+          house : propsToPlace.house,
+          store : propsToPlace.store,
+          industry : propsToPlace.industry - 1,
+          tree : propsToPlace.tree
+          })
+      break;
+      case "tree":
+        setPropsToPlace({
+          house : propsToPlace.house ,
+          store : propsToPlace.store,
+          industry : propsToPlace.industry,
+          tree : propsToPlace.tree - 1
+          })
+      break;
+    }
+    
   }
 
   const holMenueSlect = (option) => {
@@ -83,7 +138,7 @@ export default function MainScreen() {
 
   return (
         <div className="mainScreen">
-            <MenuSection propsPlaced={propsPlaced} selectedProps={selectedProps} holMenueSlect={holMenueSlect} hintManager={hintManager} levelData={levelData}/>
+            <MenuSection disablePlacement={disablePlacement} propsToPlace={propsToPlace } selectedProps={selectedProps} holMenueSlect={holMenueSlect} hintManager={hintManager} levelData={levelData}/>
             <GameSection selectedProps={selectedProps} hintActivated={hintActivated} levelData={levelData} propsPlacementDetector={propsPlacementDetector}/>
         </div>
       )

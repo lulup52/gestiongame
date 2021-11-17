@@ -1,29 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import "../sass/menuSection.css"
 
-export default function MenuSection({holMenueSlect, hintManager, levelData, propsPlaced}) {
+export default function MenuSection({ holMenueSlect, hintManager, propsToPlace}) {
 
 
-  const [houseToPlace, setHouseToPlace] = useState(levelData.props.house)
-  const [storeToPlace, setStoreToPlace] = useState(levelData.props.store)
-  const [industryToPlace, setIndustryToPlace] = useState(levelData.props.industry)
-  const [treeToPlace, setTreeToPlace] = useState(levelData.props.tree)
-  const [menuUpdator, setMenuUpdator] = useState(true)
 
-   
-   useEffect(() => {
-    setMenuUpdator(!menuUpdator)
-    setHouseToPlace(levelData.props.house - propsPlaced.house)
-    setStoreToPlace(levelData.props.store - propsPlaced.store)
-    setIndustryToPlace(levelData.props.industry - propsPlaced.industry)
-    setTreeToPlace(levelData.props.tree - propsPlaced.tree)
-  },[propsPlaced])
+
+  /*--------------- gérer le décompte des ééments a placer par lvl ------------------ */
+  
 
   const manageHint = (e) => {
     hintManager()
     manageHolingProps(e)
   }
-  
+
 
   const manageHolingProps = (propsSelected) => {
     let props = propsSelected.target
@@ -40,7 +30,6 @@ export default function MenuSection({holMenueSlect, hintManager, levelData, prop
     props.id !== 'hint' && hintManager("clearHint")
   }
     
-  /*--------------- gérer le décompte des ééments a placer par lvl ------------------ */
 
   
   return (
@@ -51,19 +40,19 @@ export default function MenuSection({holMenueSlect, hintManager, levelData, prop
           </div>
           <div className='propsAndCounter'>
             <div className='menuOption house' id='house' onClick={e => manageHolingProps(e)}></div>  
-            <p>{houseToPlace}</p>
+            <p>{propsToPlace.house}</p>
           </div>
           <div className='propsAndCounter'>
             <div className='menuOption store' id='store' onClick={e => manageHolingProps(e)}></div>  
-            <p>{storeToPlace}</p>
+            <p>{propsToPlace.store}</p>
           </div>
           <div className='propsAndCounter'>
             <div className='menuOption tree' id='tree' onClick={e => manageHolingProps(e)}></div>  
-            <p>{treeToPlace}</p>
+            <p>{propsToPlace.tree}</p>
           </div>  
           <div className='propsAndCounter'>
             <div className='menuOption industry' id='industry' onClick={e => manageHolingProps(e)}></div>  
-            <p>{industryToPlace}</p>
+            <p>{propsToPlace.industry}</p>
           </div>
           <div>
             <div className='menuOption hint' id='hint' onClick={e => manageHint(e)}></div>  
