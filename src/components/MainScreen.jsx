@@ -139,7 +139,7 @@ export default function MainScreen() {
   return (
         <div className="mainScreen">
             <MenuSection disablePlacement={disablePlacement} propsToPlace={propsToPlace } selectedProps={selectedProps} holMenueSlect={holMenueSlect} hintManager={hintManager} levelData={levelData}/>
-            <GameSection selectedProps={selectedProps} hintActivated={hintActivated} levelData={levelData} propsPlacementDetector={propsPlacementDetector}/>
+            <GameSection propsToPlace={propsToPlace} selectedProps={selectedProps} hintActivated={hintActivated} levelData={levelData} propsPlacementDetector={propsPlacementDetector}/>
         </div>
       )
     

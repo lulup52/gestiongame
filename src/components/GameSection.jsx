@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import '../sass/gameSection.css'
 
-export default function GameSection({selectedProps, hintActivated, levelData, propsPlacementDetector}) {
+export default function GameSection({selectedProps, hintActivated, levelData, propsPlacementDetector, propsToPlace}) {
 
     const [gameIsOn, setGameIsOn] = useState(false)
     const [boardMap, setBoardMap] = useState([])
@@ -47,7 +47,7 @@ export default function GameSection({selectedProps, hintActivated, levelData, pr
     }
 
 
-  /*---------------------debut de pqrtie-------------------------*/
+  /*---------------------debut de partie (fonction en atente pour le moment)-------------------------*/
   
   const StartTheGame = () => {
     setGameIsOn(!gameIsOn)
@@ -206,11 +206,24 @@ const aplyProps = (e) => {
       }
 
         
-      } else {
+    } else {
+        console.log(selectedProps,propsToPlace )
         /*si la tuile est libre*/
+        if (selectedProps === "house" &&  propsToPlace.house !==0 ||
+            selectedProps === "store" &&  propsToPlace.store !==0 ||
+            selectedProps === "industry" &&  propsToPlace.industry !==0 ||
+            selectedProps === "tree" &&  propsToPlace.tree !==0 
+        )  {
 
-        let coord= e.target.dataset.coord
-        updateMap(coord, "build")
+          /* ----- si il reste encore des props du type séléctioné à placer --------*/
+          let coord= e.target.dataset.coord
+          updateMap(coord, "build")
+        } else {
+          /* ----- si le stock de props sélectioné est a 0 le positionement du props est imposible, 
+          une animation se joue dans le menu pour prévenir le joueur--------*/
+          console.log(`a pu ${selectedProps}` )
+        }
+     
 
       }
     }
