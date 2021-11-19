@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import '../sass/gameSection.css'
 
-export default function GameSection({selectedProps, hintActivated, levelData, propsPlacementDetector, propsToPlace}) {
+export default function GameSection({setPropsToPlace, selectedProps, hintActivated, levelData, propsPlacementDetector, propsToPlace}) {
 
     const [gameIsOn, setGameIsOn] = useState(false)
     const [boardMap, setBoardMap] = useState([])
@@ -207,24 +207,25 @@ const aplyProps = (e) => {
 
         
     } else {
-        console.log(selectedProps,propsToPlace )
-        /*si la tuile est libre*/
-        if (selectedProps === "house" &&  propsToPlace.house !==0 ||
+      /*on ne déclanche cette étape que si on a sélectioné un props*/
+      if (selectedProps !== "trash" && selectedProps !== "hint" ) {
+          /*si la tuile est libre, on vérifie que le props sélectioné est encore disponible dans la réserve*/
+          if (
+            selectedProps === "house" &&  propsToPlace.house !==0 ||
             selectedProps === "store" &&  propsToPlace.store !==0 ||
             selectedProps === "industry" &&  propsToPlace.industry !==0 ||
             selectedProps === "tree" &&  propsToPlace.tree !==0 
-        )  {
-
+          ){
           /* ----- si il reste encore des props du type séléctioné à placer --------*/
-          let coord= e.target.dataset.coord
-          updateMap(coord, "build")
-        } else {
-          /* ----- si le stock de props sélectioné est a 0 le positionement du props est imposible, 
-          une animation se joue dans le menu pour prévenir le joueur--------*/
-          console.log(`a pu ${selectedProps}` )
+            let coord= e.target.dataset.coord
+            console.log(`je build` )
+            updateMap(coord, "build")
+          } else {
+            /* ----- si le stock de props sélectioné est a 0 le positionement du props est imposible, 
+            <A FAIRE>une animation se joue dans le menu pour prévenir le joueur<A FAIRE>*/
+            console.log(`a pu ${selectedProps}`)
+          }
         }
-     
-
       }
     }
   }
@@ -249,6 +250,42 @@ const updateMap = (newCoord, updater, newClass) => {
 
            tile.behavior = selectedProps
           } else {
+            /*On va vérifier quel props on suprime du tableau et on incrémente dans le menu, le props corespondant*/
+            switch (tile.behavior) {
+              case "house" :
+                setPropsToPlace(
+                  {house : propsToPlace.house + 1 ,
+                  store : propsToPlace.store,
+                  industry : propsToPlace.industry,
+                  tree : propsToPlace.tree}
+                  )
+              break;
+              case "store" :
+                setPropsToPlace(
+                  {house : propsToPlace.house,
+                  store : propsToPlace.store+1,
+                  industry : propsToPlace.industry,
+                  tree : propsToPlace.tree}
+                  )
+              break;
+              case "industry" :
+                setPropsToPlace(
+                  {house : propsToPlace.house,
+                  store : propsToPlace.store,
+                  industry : propsToPlace.industry+1,
+                  tree : propsToPlace.tree}
+                  )
+              break;
+              case "tree" :
+                setPropsToPlace(
+                  {house : propsToPlace.house,
+                  store : propsToPlace.store,
+                  industry : propsToPlace.industry,
+                  tree : propsToPlace.tree+1}
+                  )
+              break;
+            }
+
             tile.behavior = 'basicTile'
           }
       }

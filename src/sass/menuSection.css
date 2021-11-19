@@ -59,13 +59,16 @@ p {
   background-image: url(../svgImg/industry-solid.svg);
 }
 
+.hint {
+  background-image: url(../svgImg/question-circle-regular.svg);
+}
+
 .trash {
-  background-color: red;
+  background-image: url(../svgImg/trash-alt-solid.svg);
   margin-bottom: 1rem;
 }
 
 .hint {
-  background-color: blue;
   margin-top: 1rem;
 }
 

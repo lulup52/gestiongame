@@ -9,7 +9,7 @@ import Levels from '../data/levels.json'
 export default function MainScreen() {
 /* ---------- on charge le lvl 1 par défaut ----------------- */
   const [levelData, /*setLevelData*/] = useState(Levels[0])
-  
+  const [refreshMenu, setRefreshMenu] = useState(true)
   const [propsToDisable, setPropsToDisable] = useState({
     house : false,
     store : false,
@@ -29,47 +29,8 @@ export default function MainScreen() {
     },[])
 
   useEffect(() => {
-    if(propsToPlace.house === 0) {
-      console.log("1")
-      // setPropsToDisable({
-      //   house : true,
-      //   store : propsToDisable.store,
-      //   industry : propsToDisable.industry,
-      //   tree : propsToDisable.tree
-      //   })
-    }
-    if(propsToPlace.store === 0) {
-      console.log("2")
-
-      // setPropsToDisable({
-      //   house : propsToDisable.house,
-      //   store : true,
-      //   industry : propsToDisable.industry,
-      //   tree : propsToDisable.tree
-      //   })
-    }
-    if(propsToPlace.industry === 0) {
-      console.log("3")
-
-      // setPropsToDisable({
-      //   house : propsToDisable.house,
-      //   store : propsToDisable.store,
-      //   industry : true,
-      //   tree : propsToDisable.tree
-      //   })
-    }
-    if(propsToPlace.tree === 0) {
-      console.log("4")
-
-      // setPropsToDisable({
-      //   house : propsToDisable.house,
-      //   store : propsToDisable.store,
-      //   industry : propsToDisable.industry,
-      //   tree : true
-      //   })
-    }
-
-    },[propsToPlace])
+    console.log("je met a jour le menu")
+  },[propsToPlace])
 
 
   const [selectedProps, setSelectedProps] = useState('')
@@ -139,7 +100,7 @@ export default function MainScreen() {
   return (
         <div className="mainScreen">
             <MenuSection disablePlacement={disablePlacement} propsToPlace={propsToPlace } selectedProps={selectedProps} holMenueSlect={holMenueSlect} hintManager={hintManager} levelData={levelData}/>
-            <GameSection propsToPlace={propsToPlace} selectedProps={selectedProps} hintActivated={hintActivated} levelData={levelData} propsPlacementDetector={propsPlacementDetector}/>
+            <GameSection setPropsToPlace={setPropsToPlace} propsToPlace={propsToPlace} selectedProps={selectedProps} hintActivated={hintActivated} levelData={levelData} propsPlacementDetector={propsPlacementDetector}/>
         </div>
       )
     
