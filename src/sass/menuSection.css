@@ -85,5 +85,51 @@ p {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  position: relative;
+}
+
+.tiltedTile {
+  -webkit-animation-duration: .5s;
+          animation-duration: .5s;
+  -webkit-animation-name: tilt;
+          animation-name: tilt;
+  background-color: red;
+  color: white;
+}
+
+@-webkit-keyframes tilt {
+  0% {
+    left: 0;
+  }
+  25% {
+    left: 5px;
+  }
+  50% {
+    left: -5px;
+  }
+  75% {
+    left: 5px;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes tilt {
+  0% {
+    left: 0;
+  }
+  25% {
+    left: 5px;
+  }
+  50% {
+    left: -5px;
+  }
+  75% {
+    left: 5px;
+  }
+  100% {
+    left: 0;
+  }
 }
 /*# sourceMappingURL=menuSection.css.map */

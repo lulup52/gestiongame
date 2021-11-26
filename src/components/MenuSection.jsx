@@ -40,19 +40,19 @@ export default function MenuSection({ holMenueSlect, hintManager, propsToPlace})
           </div>
           <div className='propsAndCounter'>
             <div className='menuOption house' id='house' onClick={e => manageHolingProps(e)}></div>  
-            <p>{propsToPlace.house}</p>
+            <p className='houseMenu'>{propsToPlace.house}</p>
           </div>
           <div className='propsAndCounter'>
             <div className='menuOption store' id='store' onClick={e => manageHolingProps(e)}></div>  
-            <p>{propsToPlace.store}</p>
+            <p className='storeMenu'>{propsToPlace.store}</p>
           </div>
           <div className='propsAndCounter'>
             <div className='menuOption tree' id='tree' onClick={e => manageHolingProps(e)}></div>  
-            <p>{propsToPlace.tree}</p>
+            <p className='treeMenu'>{propsToPlace.tree}</p>
           </div>  
           <div className='propsAndCounter'>
             <div className='menuOption industry' id='industry' onClick={e => manageHolingProps(e)}></div>  
-            <p>{propsToPlace.industry}</p>
+            <p className='industryMenu'>{propsToPlace.industry}</p>
           </div>
           <div>
             <div className='menuOption hint' id='hint' onClick={e => manageHint(e)}></div>  

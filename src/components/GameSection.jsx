@@ -224,6 +224,12 @@ const aplyProps = (e) => {
             /* ----- si le stock de props sélectioné est a 0 le positionement du props est imposible, 
             <A FAIRE>une animation se joue dans le menu pour prévenir le joueur<A FAIRE>*/
             console.log(`a pu ${selectedProps}`)
+            document.querySelector(`.${selectedProps}Menu`).classList.add("tiltedTile")
+            setTimeout(() => {
+              document.querySelector(`.${selectedProps}Menu`).classList.remove("tiltedTile")
+              
+            }, 1000);
+            
           }
         }
       }

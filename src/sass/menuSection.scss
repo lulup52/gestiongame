@@ -64,5 +64,20 @@ p {
         padding: .5rem;
         border: 1px black solid;
         height: fit-content;
+        position: relative;
     }
+}
+
+.tiltedTile {
+    animation-duration:.5s;
+    animation-name: tilt;
+    background-color: red;
+    color: white;
+}
+@keyframes tilt {
+    0% {left:0; }
+    25% { left: 5px; }
+    50%{ left: -5px; }
+    75%{ left: 5px; }
+    100%{ left: 0; }
 }
